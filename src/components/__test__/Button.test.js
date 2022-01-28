@@ -1,24 +1,22 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import Button from '@components/Button';
 
-const mockedOnClick = jest.fn();
-
-describe('Button', function () {
-  beforeEach(() => {
-    render(<Button text='test' onClick={mockedOnClick} />)
-  });
-
+describe('Button', () => {
   it('should render', () => {
-    expect(screen.getByTestId('button')).toBeInTheDocument();
+    let { getByTestId } = render(<Button text='test' />);
+    expect(getByTestId('button')).toBeInTheDocument();
   });
 
   it('should set text', () => {
-    expect(screen.getByRole('button', {name: 'test'})).toBeInTheDocument();
+    let { getByRole } = render(<Button text='test' />);
+    expect(getByRole('button', {name: 'test'})).toBeInTheDocument();
   });
 
   it('should call onClick event', () => {
-    fireEvent.click(screen.getByRole('button'));
-    expect(mockedOnClick).toBeCalled();
+    let mockedOnClick = jest.fn();
+    let { getByRole } = render(<Button text='test' onClick={mockedOnClick} />);
+    fireEvent.click(getByRole('button'));
+    expect(mockedOnClick).toHaveBeenCalledTimes(1);
   });
 })

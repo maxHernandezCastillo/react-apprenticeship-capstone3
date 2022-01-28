@@ -2,13 +2,13 @@ import React from 'react';
 
 function Button({ text, onClick }) {
   return (
-    <Button
+    <button
       data-testid='button'
       className='button'
       onClick={onClick}
     >
       {text}
-    </Button>
+    </button>
   );
 };
 

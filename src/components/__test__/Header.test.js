@@ -12,8 +12,6 @@ const mockedAuthenticationValue = {
 };
 
 describe('Header', function () {
-  test.todo('should render');
-
   it('should render', () => {
     render(<Header />);
     expect(screen.getByTestId('header')).toBeInTheDocument();

@@ -2,19 +2,16 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import IconButton from '@components/IconButton';
 
-const mockedOnClick = jest.fn();
-
-describe('IconButton', function () {
-  beforeEach(() => {
-    render(<IconButton onClick={mockedOnClick} />)
-  });
-
+describe('IconButton', () => {
   it('should render', () => {
+    render(<IconButton />);
     expect(screen.getByTestId('icon-button')).toBeInTheDocument();
   });
 
   it('should call onClick event', () => {
+    var mockedOnClick = jest.fn();
+    render(<IconButton onClick={mockedOnClick} />);
     fireEvent.click(screen.getByRole('button'));
-    expect(mockedOnClick).toBeCalled();
+    expect(mockedOnClick).toHaveBeenCalledTimes(1);
   });
 })

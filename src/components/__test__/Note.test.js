@@ -35,32 +35,32 @@ describe('Note', function () {
     expect(screen.getByText('test-text')).toBeInTheDocument();
   });
 
-  it('should change when clicked a new color', () => {
-    act(async () => {
+  it('should change when clicked a new color', async () => {
+    await act(async () => {
       const { result, waitForValueToChange } = renderHook(
         () => useNotes(),
         { wrapper: NotesContextProvider }
       );
 
-      userEvent.click(screen.findByAltText(/.*color.*/i));
-      userEvent.click(screen.findByAltText(/.*red.*/i));
+      userEvent.click(await screen.findByAltText(/.*color.*/i));
+      userEvent.click(await screen.findByAltText(/.*red.*/i));
   
       waitForValueToChange(() => result.current.notes);
       expect(result.current.notes[0].color).toHaveValue(/.*red.*/i);
     });
   });
 
-  it('should add to non archived notes when click on restore button', () => {
-    act(async () => {
+  it('should add to non archived notes when click on restore button', async () => {
+    await act(async () => {
       const { result, waitForValueToChange } = renderHook(
         () => useNotes(),
         { wrapper: NotesContextProvider }
       );
 
-      userEvent.click(screen.findByAltText(/.*restore.*/i));
+      userEvent.click(await screen.findByAltText(/.*restore.*/i));
   
       waitForValueToChange(() => result.current.notes);
-      expect(result.current.notes[0].archived).toHaveValue(false);
+     expect(result.current.notes[0].archived).toHaveValue(false);
     });
   });
 })

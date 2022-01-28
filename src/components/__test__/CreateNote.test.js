@@ -37,7 +37,7 @@ describe('CreateNote', function () {
       userEvent.click(screen.getByAltText(/.*add.*/i));
   
       waitForValueToChange(() => result.current.notes);
-      expect(result.current.notes).toHaveLength(1);  
+      expect(result.current.notes).toHaveLength(1);
     });
   });
 })

@@ -1,17 +1,18 @@
 import React from 'react';
 
-function IconButton(props) {
+function IconButton({ icon }) {
   return (
-    <div
-      data-testid={ props['data-testid'] }
+    <button
+      data-testid='icon-button'
       className='icon-button'
     >
-    </div>
+      {icon}
+    </button>
   );
 };
 
 IconButton.defaultProps = {
-  'data-testid': '',
+  icon: null
 };
 
 export default IconButton;
