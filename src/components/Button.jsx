@@ -1,13 +1,20 @@
 import React from 'react';
 
-function Button({ text, onClick }) {
+import '@style/button.css';
+
+function Button({ 
+  className='',
+  type='default', 
+  text='',
+  onClick=null
+}) {
   return (
     <button
       data-testid='button'
-      className='button'
+      className={`button ${className}`}
       onClick={onClick}
     >
-      {text}
+      <h4>{text}</h4>
     </button>
   );
 };

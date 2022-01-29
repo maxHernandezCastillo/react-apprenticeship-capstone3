@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
 
 import reportWebVitals from './reportWebVitals';
 import App from '@components/App';
+import '@style/global.css';
+import '@style/normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,8 +12,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-library.add(fas, far);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

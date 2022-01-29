@@ -1,17 +1,13 @@
 import React from 'react';
 
-function Note({ note }) {
+function Note({ className='', note={} }) {
   return (
     <div
       data-testid='note'
-      className='note'
+      className={`note ${className}`}
     >
     </div>
   );
-};
-
-Note.defaultProps = {
-
 };
 
 export default Note;

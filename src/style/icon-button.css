@@ -1,0 +1,15 @@
+
+.icon-button {
+  display: block;
+  background-color: transparent;
+  cursor: pointer;
+  border: transparent;
+  color: var(--gray-700);
+  padding: 6px;
+}
+
+.icon-button:active:not(:disabled) {
+  border-radius: 6px;
+  background-color: var(--gray-700);
+  color: var(--gray-contrast);
+}

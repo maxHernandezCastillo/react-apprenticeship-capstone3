@@ -1,13 +1,17 @@
 import React from 'react';
 
-function Header() {
+import '@style/home.css';
+import CreateNote from '@components/CreateNote';
+
+function Home() {
   return (
     <div
       data-testid='home'
-      className='header'
+      className='home'
     >
+      <CreateNote />
     </div>
   );
 }
 
-export default Header;
+export default Home;

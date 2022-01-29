@@ -1,17 +1,11 @@
 import React from 'react';
 
-function Searchbar(props) {
+export default function Searchbar({ className='' }) {
   return (
     <div
-      data-testid={ props['data-testid'] }
-      className='searchbar'
+      data-testid='searchbar'
+      className={`searchbar ${className}`}
     >
     </div>
   );
 };
-
-Searchbar.defaultProps = {
-  'data-testid': '',
-};
-
-export default Searchbar;

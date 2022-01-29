@@ -1,18 +1,25 @@
 import React from 'react';
 
-function IconButton({ icon }) {
+import '@style/icon-button.css';
+
+function IconButton({ 
+  children,
+  className='',
+  type='button',
+  onClick=null,
+  disabled=false,
+}) {
   return (
     <button
       data-testid='icon-button'
-      className='icon-button'
+      className={`icon-button ${className}`}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
     >
-      {icon}
+      {children}
     </button>
   );
-};
-
-IconButton.defaultProps = {
-  icon: null
 };
 
 export default IconButton;

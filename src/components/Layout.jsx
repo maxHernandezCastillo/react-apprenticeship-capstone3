@@ -2,6 +2,8 @@ import React from 'react';
 
 import Header from '@components/Header';
 
+import '@style/layout.css';
+
 function Layout(props) {
 let { children } = props;
 
@@ -10,7 +12,7 @@ let { children } = props;
       data-testid='layout'
       className='layout'
     >
-      <Header />
+      <Header className='layout__header' />
       <div className='layout__content'>
         { children }
       </div>
