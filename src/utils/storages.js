@@ -1,5 +1,5 @@
 
-function Storage(key) {
+function Storage(key, initial) {
   this.key = key;
   this.get = function get() {
     try {
@@ -13,8 +13,13 @@ function Storage(key) {
   this.set = function set(value) {
     window.localStorage.setItem(key, JSON.stringify(value));
   };
+
+  if (this.get() === null && initial !== null)
+    this.set(initial);
 }
 
-const AuthStorage = new Storage('AUTHENTICATION_STORAGE_KEY');
 
-export { AuthStorage };
+const NotesStorage = new Storage('NOTES_STORAGE_KEY', { notes: [] });
+const AuthStorage = new Storage('AUTHENTICATION_STORAGE_KEY', { authenticated: false });
+
+export { AuthStorage, NotesStorage };

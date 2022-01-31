@@ -1,0 +1,19 @@
+
+.login {
+  width: 100%;
+  min-height: calc(100% - 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.login > * {
+  width: 308px;
+}
+
+.login_buttons {
+  display: flex;
+  flex-direction: row-reverse;
+}

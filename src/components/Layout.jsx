@@ -4,9 +4,7 @@ import Header from '@components/Header';
 
 import '@style/layout.css';
 
-function Layout(props) {
-let { children } = props;
-
+function Layout({ children }) {
   return (
     <div
       data-testid='layout'

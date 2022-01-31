@@ -45,7 +45,7 @@ html {
 html {
   background-color: var(--background-color);
   font-size: 14px;
-  font-family: Verdana, Georgia, sans-serif;
+  font-family: Verdana, Helvetica, sans-serif;
 }
 
 body {
@@ -79,9 +79,9 @@ h4 {
   font-size: 14px;
   font-family: Verdana, sans-serif;
   font-weight: bolder;
-  margin: 0;
   letter-spacing: 0.1rem;
   line-height: 1.25rem;
+  margin: 0;
 }
 
 h5 {
@@ -93,21 +93,23 @@ h5 {
 
 p {
   font-size: 14px;
-  font-family: Georgia, serif;
+  font-family: Helvetica, serif;
   margin: 0;
 }
 
 small {
   font-size: 12px;
-  font-family: Georgia, serif;
+  font-family: Helvetica, serif;
   margin: 0;
 }
 
 label {
   font-size: 14px;
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+  font-weight: bolder;
   margin: 0;
+  letter-spacing: 0.1rem;
+  line-height: 1.25rem;
 }
 
 #root {

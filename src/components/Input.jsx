@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+
+import '@style/input.css';
 
 function Input({ 
   className='', 
@@ -7,13 +9,20 @@ function Input({
   value, 
   onChange 
 }) {
+  let inputRef = useRef(null);
+
   return (
     <div
       data-testid='input'
       className={`input ${className}`}
     >
-      <input 
-        {...{label, type, value, onChange }}
+      <label htmlFor={inputRef}>{label}</label>
+      <input
+        ref={inputRef}
+        type={type}
+        value={value}
+        onChange={onChange}
+        className='input__input'
       />
     </div>
   );

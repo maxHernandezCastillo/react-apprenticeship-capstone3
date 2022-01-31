@@ -13,5 +13,5 @@ module.exports = {
       '@style': path.resolve(__dirname, 'src/style'),
       '@assets': path.resolve(__dirname, 'src/assets')
     }
-  },
+  }
 };

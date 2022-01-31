@@ -15,7 +15,7 @@ const useGlobalContext = () => {
   return context;
 };
 
-export default function GlobalContextProvider ({ children }) {
+export default function GlobalContextProvider ({ children, value=null }) {
   const [state, dispatcher] = useSafeReducer((state, action) => {
     switch(action.type) {
       case 'SET_SEARCH_TERM':
@@ -28,10 +28,14 @@ export default function GlobalContextProvider ({ children }) {
     };
   }, initial_global_context);
 
+  var reducers = {
+    setSearchTerm: (searchTerm) => dispatcher({ type: 'SET_SEARCH_TERM', payload: searchTerm })
+  };
+
   return (
-    <GlobalContext.Provider value={{
+    <GlobalContext.Provider value={value || {
       ...state,
-      setSearchTerm: (searchTerm) => dispatcher({ type: 'SET_SEARCH_TERM', payload: searchTerm }),
+      ...reducers
     }}>
       { children }
     </GlobalContext.Provider>

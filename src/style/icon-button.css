@@ -1,6 +1,5 @@
 
 .icon-button {
-  display: block;
   background-color: transparent;
   cursor: pointer;
   border: transparent;
@@ -9,7 +8,19 @@
 }
 
 .icon-button:active:not(:disabled) {
-  border-radius: 6px;
-  background-color: var(--gray-700);
+  background-color: var(--gray-800);
   color: var(--gray-contrast);
+  border-radius: 6px;
+}
+
+.icon-button--secondary {
+  background-color: var(--gray-800);
+  color: var(--gray-contrast);
+  border-radius: 6px;
+}
+
+.icon-button--secondary:active:not(:disabled) {
+  background-color: var(--gray-600);
+  color: var(--gray-contrast);
+  border-radius: 6px;
 }

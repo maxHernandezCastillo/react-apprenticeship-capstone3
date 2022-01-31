@@ -6,7 +6,7 @@ import GlobalProvider from '@providers/Global';
 import Layout from '@components/Layout';
 
 const mockedAuthenticationValue = {
-  user: { username: "username-test"},
+  authenticated: true,
   login: () => true,
   logout: () => true
 };

@@ -5,16 +5,13 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 
 import Routes from '@components/Routes';
 import GlobalProvider from '@providers/Global';
-import Layout from '@components/Layout';
 
 library.add(fas, far);
 
 export default function App() {
   return (
     <GlobalProvider>
-      <Layout>
-        <Routes />
-      </Layout>
+      <Routes />
     </GlobalProvider>
   );
 }

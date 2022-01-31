@@ -1,0 +1,37 @@
+.not-found {
+  min-height: calc(100% - 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  gap: 24px;
+}
+
+.not-found__title {
+  font-size: 48px;
+}
+
+.not-found__quote {
+  max-width: 308px;
+  text-align: center;
+
+  font-family: Helvetica, sans-serif;
+  font-weight: bolder;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.not-found__author {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 3px;
+  background-color: var(--black);
+  color: var(--white);
+
+  font-family: Helvetica, sans-serif;
+  font-weight: bolder;
+  margin: 0;
+}
