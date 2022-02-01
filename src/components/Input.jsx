@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import '@style/input.css';
 
@@ -9,16 +10,16 @@ function Input({
   value, 
   onChange 
 }) {
-  let inputRef = useRef(null);
+  let inputRef = useRef(uuidv4());
 
   return (
     <div
       data-testid='input'
       className={`input ${className}`}
     >
-      <label htmlFor={inputRef}>{label}</label>
+      <label htmlFor={inputRef.current}>{label}</label>
       <input
-        ref={inputRef}
+        id={inputRef.current}
         type={type}
         value={value}
         onChange={onChange}

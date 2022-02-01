@@ -19,6 +19,6 @@
 }
 
 .home__searchbar {
-  width: 100%;
+  width: calc(100% - 24px);
   max-width: 720px;
 }

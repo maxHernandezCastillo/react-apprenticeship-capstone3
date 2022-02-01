@@ -8,7 +8,7 @@ import ArchivedPage from '@pages/Archived';
 import LoginPage from '@pages/Login';
 import NotFoundPage from '@pages/NotFound';
 
-export default function () {
+export default function RoutesComponent () {
   return (
     <Routes>
       <Route exact path="/" element={

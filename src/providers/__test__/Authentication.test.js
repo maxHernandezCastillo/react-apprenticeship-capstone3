@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
+import { AuthStorage } from '@utils/storages';
 import Authentication, { useAuthentication } from '@providers/Authentication'
 
 describe('Authentication provider', function () {
@@ -11,23 +12,26 @@ describe('Authentication provider', function () {
         { wrapper: Authentication }
       );
 
-      result.login('Wizeline', 'Rocks!')
-      waitForValueToChange(() => result.current.user);
-      expect(result.current.user.username).toHaveValue(/Wizeline/i);
+      result.current.login('Wizeline', 'Rocks!')
+      await waitForValueToChange(() => result.current.authenticated);
+      expect(result.current.authenticated).toEqual(true);
     });
   });
 
   it('should logout when logout function is correctly called', async () => {
+    AuthStorage.set({ authenticated: false });
+
     await act(async () => {
-      const { result, waitForValueToChange } = renderHook(
+      const { result, waitFor } = renderHook(
         () => useAuthentication(),
         { wrapper: Authentication }
       );
-      result.login('Wizeline', 'Rocks!')
-      waitForValueToChange(() => result.current.user);
-      result.logout();
-      waitForValueToChange(() => result.current.user);
-      expect(result.current.user).toHaveValue(null);
+      result.current.login('Wizeline', 'Rocks!')
+      await waitFor(() => result.current.authenticated);
+      expect(result.current.authenticated).toEqual(true);
+      result.current.logout();
+      await waitFor(() => !result.current.authenticated);
+      expect(result.current.authenticated).toEqual(false);
     });
   });
 })

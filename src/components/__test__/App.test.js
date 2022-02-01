@@ -1,48 +1,51 @@
 import { render } from "@testing-library/react";
+import {  MemoryRouter } from 'react-router-dom';
 
-import App from '@components/App';
 import Routes from '@components/Routes';
 import GlobalProvider from '@providers/Global';
-import Layout from '@components/Layout';
-
-const mockedAuthenticationValue = {
-  authenticated: true,
-  login: () => true,
-  logout: () => true
-};
 
 describe('App component', function () {
-  it('Should show home page when logged in', async () => {
-    var { findByTestId } = render(
-      <GlobalProvider authenticationValue={mockedAuthenticationValue}>
-        <Layout>
+  it('Should show home page when logged in', () => {
+    var { getByTestId } = render(
+      <MemoryRouter initialEntries={["/"]}>
+        <GlobalProvider authenticationValue={{ authenticated: true }}>
           <Routes />
-        </Layout>
-      </GlobalProvider>
+        </GlobalProvider>
+      </MemoryRouter>
     );
-    expect(findByTestId('home-page')).toBeInTheDocument();
+    expect(getByTestId('home')).toBeInTheDocument();
   });
 
-  it('Should redirect to login page when not logged in', async () => {
-    var { findByTestId } = render(<App />);
-    expect(findByTestId('login-page')).toBeInTheDocument();
-  });
-
-  it('Should show not found page when invalid route accesed', async () => {
-    window.history.pushState({}, 'Test', 'some-random-page-298761982769381');
-    var { findByTestId } = render(<App />);
-    expect(findByTestId('not-found-page')).toBeInTheDocument();
-  });
-
-  it('Should show archived notes page when accesed', async () => {
-    window.history.pushState({}, 'Test', '/archived');
-    var { findByTestId } = render(
-      <GlobalProvider authenticationValue={mockedAuthenticationValue}>
-        <Layout>
+  it('Should redirect to login page when not logged in', () => {
+    var { getByTestId } = render(
+      <MemoryRouter initialEntries={["/"]}>
+        <GlobalProvider authenticationValue={{ authenticated: false }}>
           <Routes />
-        </Layout>
-      </GlobalProvider>
+        </GlobalProvider>
+      </MemoryRouter>
     );
-    expect(findByTestId('archived-notes-page')).toBeInTheDocument();
+    expect(getByTestId('login')).toBeInTheDocument();
+  });
+
+  it('Should show not found page when invalid route accesed', () => {
+    var { getByTestId } = render(
+      <MemoryRouter initialEntries={["/some-random-page-298761982769381"]}>
+        <GlobalProvider authenticationValue={{ authenticated: true }}>
+          <Routes />
+        </GlobalProvider>
+      </MemoryRouter>
+    );
+    expect(getByTestId('not-found')).toBeInTheDocument();
+  });
+
+  it('Should show archived notes page when accesed', () => {
+    var { getByTestId } = render(
+      <MemoryRouter initialEntries={["/archived"]}>
+        <GlobalProvider authenticationValue={{ authenticated: true }}>
+          <Routes />
+        </GlobalProvider>
+      </MemoryRouter>
+    );
+    expect(getByTestId('archived-notes')).toBeInTheDocument();
   });
 })

@@ -9,7 +9,7 @@ describe('Input', function () {
   beforeEach(() => {
     render(
       <Input
-        label='Input label'
+        label='input-label'
         value='text-value'
         onChange={mockedOnChange}
       />

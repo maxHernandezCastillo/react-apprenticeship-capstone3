@@ -3,21 +3,18 @@ import { useReducer, useEffect, useRef, useCallback } from 'react';
 function useSafeReducer() {
   // setting up
   const [state, dispatcher] = useReducer(...arguments);
-  let flag = useRef(true);
+  var flag = useRef(true);
 
   // When unmount
-  useEffect(
-    () => () => {
-      flag = false;
-    },
-    []
-  );
+  useEffect(() => {
+    return () => flag.current = false;
+  }, []);
 
   // return safe setter
   return [
     state,
     useCallback((data) => {
-      if (flag) dispatcher(data);
+      if (flag.current) dispatcher(data);
     }, []),
   ];
 }

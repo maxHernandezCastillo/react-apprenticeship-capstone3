@@ -1,4 +1,4 @@
-import { render } from 'react-dom';
+import { render } from '@testing-library/react';
 
 import NotFound from '@pages/NotFound';
 

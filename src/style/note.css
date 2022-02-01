@@ -47,7 +47,7 @@
 }
 
 .note__colors {
-  width: 100%;
+  width: 0px;
   height: 24px;
   display: flex;
   flex-direction: row;
@@ -60,8 +60,8 @@
   transition: 1s;
 }
 
-.note__colors--hidden {
-  width: 0px;
+.note__colors--open {
+  width: 100%;
 }
 
 .note__color {

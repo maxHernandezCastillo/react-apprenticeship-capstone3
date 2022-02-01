@@ -34,7 +34,11 @@ function CreateNote({ className='' }) {
       onSubmit={(e) => onSave(e)}
     >
       <div className='create-note__header'>
-        <IconButton type='submit' className='icon-button--secondary'>
+        <IconButton 
+          type='submit' 
+          className='icon-button--secondary'
+          aria-label='add note'
+        >
           <FontAwesomeIcon icon={['fas', 'plus']} size='1x' />
         </IconButton>
       </div>
@@ -48,20 +52,20 @@ function CreateNote({ className='' }) {
       <div className='create-note__footer'>
         <div className={`create-note__colors ${isColorsBarOpen ? '' : 'create-note__colors--hidden'}`}>
           {
-            COLORS.map((item) => (
+            COLORS.map((color) => (
               <button 
-                key={item}
+                key={color}
                 type='button' 
                 className='create-note__color'
+                aria-label={color}
                 onClick={() => {
-                  setColor(item);
+                  setColor(color);
                   setIsColorBarOpen(false);
                 }}
-                style={{backgroundColor: `var(--${item})`}}
+                style={{backgroundColor: `var(--${color})`}}
               />
             ))
           }
-
           <FontAwesomeIcon icon={['fas', 'angle-left']} />
         </div>
         <IconButton 

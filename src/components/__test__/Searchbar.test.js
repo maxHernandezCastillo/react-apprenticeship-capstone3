@@ -1,35 +1,33 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { render, fireEvent } from '@testing-library/react';
 
-import GlobalProvider, { useGlobal } from '@providers/Global';
+import GlobalProvider from '@providers/Global';
 import Searchbar from '@components/Searchbar';
 
 describe('Searchbar', function () {
-  beforeEach(() => {
-    render(
+  it('should render', () => {
+    let { getByTestId } = render(
       <GlobalProvider>
         <Searchbar />
       </GlobalProvider>
     );
+    expect(getByTestId('searchbar')).toBeInTheDocument();
   });
 
-  it('should render', () => {
-    expect(screen.getByTestId('searchbar')).toBeInTheDocument();
-  });
+  it('should set searchFilter variable when typing in the input', (done) => {
+    const callback = (searchTerm) => {
+      expect(searchTerm).toEqual('test');
+      done();
+    };
+    let { getByRole } = render(
+      <GlobalProvider globalcontextValue={{
+        setSearchTerm: callback
+      }}>
+        <Searchbar />
+      </GlobalProvider>
+    );
 
-  it('should set searchFilter variable when typing in the input', async () => {
-    await act(async () => {
-      const { result, waitForValueToChange } = renderHook(
-        () => useGlobal(),
-        { wrapper: useGlobal }
-      );
-
-      fireEvent.change(screen.getByRole('textbox', { name: /.*search.*/i }), {
-        target: { value: 'test' },
-      });
-  
-      waitForValueToChange(() => result.current.searchTerm);
-      expect(result.current.searchTerm).toHaveValue('test');
+    fireEvent.change(getByRole('textbox', { name: /searchbar/i }), {
+      target: { value: 'test' },
     });
   });
 })

@@ -16,7 +16,6 @@ function useNotes() {
 export default function NotesContextProvider({ children, value=null }) {
   var [state, dispatch] = useSafeReducer((state, action) => {
     let note = action.payload;
-
     switch(action.type) {
       case 'ADD_NOTE':
         if (state.notes.findIndex((item) => item.id === note.id) !== -1)
@@ -62,13 +61,13 @@ export default function NotesContextProvider({ children, value=null }) {
   var filterActiveNotesBy = (term) => activeNotes.filter((item) => item.text.search(new RegExp(term, 'i')) !== -1);
   var archivedNotes = state.notes.filter((item) => item.archived);
   return (
-    <NotesContext.Provider value={value || {
+    <NotesContext.Provider value={Object.assign({
       ...state,
       ...reducers,
       activeNotes,
       archivedNotes,
       filterActiveNotesBy
-    }}>
+    }, value)}>
       {children}
     </NotesContext.Provider>
   );

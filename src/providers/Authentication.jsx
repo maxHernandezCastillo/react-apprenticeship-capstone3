@@ -23,7 +23,7 @@ function RestrictedAuth({ children }) {
   return authenticated === false ? children : <Navigate to="/" replace />;
 }
 
-export default function AuthenticationProvider({ children, value=null }) {
+export default function AuthenticationProvider({ children, value={} }) {
   var [state, dispatch] = useSafeReducer((state, action) => {
     switch(action.type) {
       case 'LOGIN':
@@ -39,7 +39,7 @@ export default function AuthenticationProvider({ children, value=null }) {
   },  AuthStorage.get());
 
   useEffect(() => {
-    AuthStorage.set(state);
+    AuthStorage.set({authenticated: state.authenticated});
   }, [state.authenticated]);
 
   var reducers = {
@@ -48,10 +48,10 @@ export default function AuthenticationProvider({ children, value=null }) {
   };
 
   return (
-    <AuthenticationContext.Provider value={value || {
+    <AuthenticationContext.Provider value={Object.assign({
       ...state,
       ...reducers
-    }}>
+    }, value)}>
       {children}
     </AuthenticationContext.Provider>
   );

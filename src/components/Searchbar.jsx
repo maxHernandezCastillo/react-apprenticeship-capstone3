@@ -19,6 +19,7 @@ export default function Searchbar({
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className='searchbar__input'
+        aria-label='searchbar'
         placeholder='Search a note...'
       />
       <FontAwesomeIcon icon={['fas', 'search']} size='2x' />

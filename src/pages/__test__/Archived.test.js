@@ -1,19 +1,13 @@
 
-import { render } from 'react-dom';
+import { render } from '@testing-library/react';
 
 import GlobalProvider from '@providers/Global';
 import Archived from '@pages/Archived';
 
-const mockedAuthenticationValue = {
-  authenticated: true,
-  login: () => true,
-  logout: () => true
-};
-
 describe('Archived', function () {
   it('should render', () => {
     var { getByTestId } = render(
-      <GlobalProvider authenticationValue={mockedAuthenticationValue}>
+      <GlobalProvider authenticationValue={{ authenticated: true }}>
         <Archived />
       </GlobalProvider>
     );

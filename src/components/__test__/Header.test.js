@@ -1,45 +1,47 @@
-import { findByAltText, getByAltText, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
+import {  MemoryRouter } from 'react-router-dom';
 
 import Header from '@components/Header';
 import Routes from '@components/Routes';
 import GlobalProvider from '@providers/Global';
 
-const mockedAuthenticationValue = {
-  authenticated: true,
-  login: () => true,
-  logout: () => true
-};
-
 describe('Header', function () {
   it('should render', () => {
-    render(<Header />);
-    expect(screen.getByTestId('header')).toBeInTheDocument();
+    var { getByTestId } = render(
+      <MemoryRouter initialEntries={["/"]}>
+        <GlobalProvider authenticationValue={{ authenticated: true }}>
+          <Header />
+        </GlobalProvider>
+      </MemoryRouter>
+    );
+    expect(getByTestId('header')).toBeInTheDocument();
   });
 
-  it('Should show home page when logged in', async () => {
-    window.history.pushState({}, 'Test', '*');
-    render(
-      <GlobalProvider authenticationValue={mockedAuthenticationValue}>
-        <Header />
-        <Routes />
-      </GlobalProvider>
+  it('Should show home page when clicking notes manu if logged in', () => {
+    var { getByText, getByTestId } = render(
+      <MemoryRouter initialEntries={["/"]}>
+        <GlobalProvider authenticationValue={{ authenticated: true }}>
+          <Routes />
+        </GlobalProvider>
+      </MemoryRouter>
     );
 
     userEvent.click(getByText(/notes/i));
-    expect(await findByTestId('home-page')).toBeInTheDocument();
+    expect(getByTestId('home')).toBeInTheDocument();
   });
 
-  it('Should show home page when logged in', async () => {
+  it('Should show home page when logged in', () => {
     window.history.pushState({}, 'Test', '*');
-    render(
-      <GlobalProvider authenticationValue={mockedAuthenticationValue}>
-        <Header />
-        <Routes />
-      </GlobalProvider>
+    var { getByText, getByTestId } = render(
+      <MemoryRouter initialEntries={["/"]}>
+        <GlobalProvider authenticationValue={{ authenticated: true }}>
+          <Routes />
+        </GlobalProvider>
+      </MemoryRouter>
     );
 
     userEvent.click(getByText(/archived/i));
-    expect(await findByTestId('archived-notes')).toBeInTheDocument();
+    expect(getByTestId('archived-notes')).toBeInTheDocument();
   });
 })

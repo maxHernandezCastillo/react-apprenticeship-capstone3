@@ -1,36 +1,40 @@
-import { render } from 'react-dom';
+import { render, fireEvent } from '@testing-library/react';
 
 import AuthenticationProvider from '@providers/Authentication';
 import Login from '@pages/Login';
 
 describe('Login', function () {
   it('should render', () => {
-    var { getByTestId } = render(
-      <AuthenticationProvider>
+    let { getByTestId } = render(
+      <AuthenticationProvider value={{ authenticated: false }}>
         <Login />
       </AuthenticationProvider>
     );
     expect(getByTestId('login')).toBeInTheDocument();
   });
 
-  it('should submit username and password when submit button is clicked', () => {
-    var mockedLogin = jest.fn();
-    var { getByTestId } = render(
+  it('should submit username and password when submit button is clicked', (done) => {
+    const callback = (username, password) => {
+      expect(username).toEqual('Wizeline');
+      expect(password).toEqual('Rocks!');
+      done();
+    }
+
+    let { getByLabelText, getByText } = render(
       <AuthenticationProvider value={{
-        user: null,
-        login: mockedLogin
+        authenticated: false,
+        login: callback
       }}>
         <Login />
       </AuthenticationProvider>
     );
 
-    fireEvent.change(screen.getByLabelText(/username/i), {
+    fireEvent.change(getByLabelText(/username/i), {
       target: { value: 'Wizeline' },
     });
-    fireEvent.change(screen.getByLabelText(/password/i), {
+    fireEvent.change(getByLabelText(/password/i), {
       target: { value: 'Rocks!' },
     });
-
-    expect(mockedLogin).toHaveBeenCalledTimes(1);
+    fireEvent.click(getByText(/submit/i))
   });
 })
