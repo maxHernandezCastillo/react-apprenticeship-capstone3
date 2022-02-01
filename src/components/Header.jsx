@@ -16,12 +16,14 @@ function Header({ className='' }) {
     >
       <li 
         className={`header__item ${location.pathname === '/' ? 'header__item--selected' : ''}`}
+        aria-label='notes'
         onClick={() => navigate('/')}
       >
         Notes
       </li>
       <li
         className={`header__item ${location.pathname === '/archived' ? 'header__item--selected' : ''}`}
+        aria-label='archived'
         onClick={() => navigate('/archived')}
       >
         Archived

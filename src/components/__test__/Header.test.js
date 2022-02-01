@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { getByRole, render } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import {  MemoryRouter } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ describe('Header', function () {
   });
 
   it('Should show home page when clicking notes manu if logged in', () => {
-    var { getByText, getByTestId } = render(
+    var { getByRole, getByTestId } = render(
       <MemoryRouter initialEntries={["/"]}>
         <GlobalProvider authenticationValue={{ authenticated: true }}>
           <Routes />
@@ -27,13 +27,13 @@ describe('Header', function () {
       </MemoryRouter>
     );
 
-    userEvent.click(getByText(/notes/i));
+    userEvent.click(getByRole('listitem', {name: /notes/i}));
     expect(getByTestId('home')).toBeInTheDocument();
   });
 
   it('Should show home page when logged in', () => {
     window.history.pushState({}, 'Test', '*');
-    var { getByText, getByTestId } = render(
+    var { getByRole, getByTestId } = render(
       <MemoryRouter initialEntries={["/"]}>
         <GlobalProvider authenticationValue={{ authenticated: true }}>
           <Routes />
@@ -41,7 +41,7 @@ describe('Header', function () {
       </MemoryRouter>
     );
 
-    userEvent.click(getByText(/archived/i));
+    userEvent.click(getByRole('listitem', {name: /archived/i}));
     expect(getByTestId('archived-notes')).toBeInTheDocument();
   });
 })

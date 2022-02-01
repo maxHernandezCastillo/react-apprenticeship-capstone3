@@ -17,3 +17,10 @@
   grid-gap: 24px;
   justify-content: center;
 }
+
+.archived-notes__empty {
+  width: 308px;
+  text-align: center;
+  color: var(--gray-900);
+  user-select: none;
+}
