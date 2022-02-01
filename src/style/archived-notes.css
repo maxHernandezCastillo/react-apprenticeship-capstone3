@@ -1,0 +1,26 @@
+
+.archived-notes {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 48px;
+}
+
+.archived-notes__notes {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 308px);
+  grid-auto-flow: row;
+  grid-gap: 24px;
+  justify-content: center;
+}
+
+.archived-notes__empty {
+  width: 308px;
+  text-align: center;
+  color: var(--gray-900);
+  user-select: none;
+}
